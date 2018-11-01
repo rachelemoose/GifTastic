@@ -58,8 +58,10 @@ $("#add-dog").on("click", function(event){
     var dog = $("#animal-input").val().trim();
     console.log(dog)
     topic.push(dog);
-    $("#animal-input").val("");
+    // $("#animal-input").val("");
     renderButtons();
+    OnAdd();
+    $("#animal-input").val("");
 });
 
 function playGifs() {
@@ -73,11 +75,48 @@ function playGifs() {
     }
 }
 
+//I created this function so you get the giphs of a new dog without having to click on it's button - it happens as soon as you add the dog/click sumbit
+function OnAdd() {
+    var dog1 = $("#animal-input").val()
+    console.log(dog1)
+    var queryurl = "https://api.giphy.com/v1/gifs/search?q=" + dog1 + "&api_key=gMkEjOv9HMeLW52jYm0p0qSSXOC50AX0&limit=10";
+    console.log("Query URL: " + queryurl)
+    $.ajax({
+    url: queryurl,
+    method: "GET"
+}).done(function(response) {
+    var results = response.data
+    console.log(results)
+    for (var i = 0; i < results.length; i++) {
+        var dogDiv = $("<div>")
+        var rating = results[i].rating
+        var ratingDiv = $("<div>")
+        ratingDiv.addClass("ratings")
+        console.log(rating)
+        ratingDiv.text("Rating: " + rating)
+        dogDiv.prepend(ratingDiv)
+        var movingImage = results[i].images.fixed_height.url;
+        console.log("Giphy: " + movingImage)
+        var staticImage = results[i].images.fixed_height_still.url;
+        console.log ("Static Image: " + staticImage);
+        var showgif = $("<img>");
+        showgif.attr("src", staticImage);
+        showgif.addClass("dogGiphy");
+        showgif.attr("data-state", "still");
+        showgif.attr("data-still", staticImage)
+        showgif.attr("data-animate", movingImage);
+        dogDiv.append(showgif);
+        $("#gifArea").prepend(dogDiv);
+
+
+    }
+        })
+};
+
 renderButtons();
 
 $(document).on("click", ".dog-breed", Giftastic);
 $(document).on("click", ".dogGiphy", playGifs);
-
 
 
 

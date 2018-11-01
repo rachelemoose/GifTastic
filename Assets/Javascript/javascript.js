@@ -121,4 +121,5 @@ $(document).on("click", ".dogGiphy", playGifs);
 
 
 
+
 });

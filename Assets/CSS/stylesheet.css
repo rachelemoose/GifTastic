@@ -1,0 +1,35 @@
+.header {
+    text-align: center;
+    padding-top: 20px;
+    margin: 10px;
+    background-image: url("../Images/dog-647528_1280.jpg");
+    opacity: .5px;
+    color: #ffffff;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.dog-breed {
+    padding: 10px;
+    margin: 10px;
+}
+
+.dogGiphy {
+    padding: 10px;
+    float: left;
+    width: 300px;
+    height: 250px;
+}
+
+#gifArea {
+    display: flex;
+    flex-wrap: wrap;
+} 
+
+.ratings {
+    font-family: 'Indie Flower', cursive;
+}
+
+#animals-view {
+    display: flex;
+    flex-wrap: wrap;
+}
